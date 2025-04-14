@@ -1,0 +1,36 @@
+<!-- <h2>Add a New Book</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Book</button>
+</form> -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add a Book | Book Bazaar</title>
+    <link rel="stylesheet" href="{% static 'books/add_book.css' %}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">📚 Book Bazaar</h1>
+            <a class="btn" href="{% url 'home' %}">← Back to Home</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2 class="heading">Add a Book for Sale</h2>
+
+        <form method="POST" enctype="multipart/form-data" class="form-box">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-btn">Add Book</button>
+        </form>
+    </main>
+</body>
+
+</html>

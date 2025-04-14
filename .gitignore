@@ -1,0 +1,44 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+
+.vscode/
+letsgo.sh
+
+*/migrations/
+!*/migrations/__init__.py
+
+
+*.sqlite3
+*.dump
+*.sql
+
+*.local.py
+*.env
+
+*.log
+
+# Media / uploaded content (if applicable)
+media/
+
+# Static files collected via collectstatic (if you use it)
+staticfiles/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# WSL related
+*.bak
+*.swp
+*.swo

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Book Bazaar</title>
+    <link rel="stylesheet" href="{% static 'books/home.css' %}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">📚 Book Bazaar</h1>
+            <a class="btn" href="{% url 'add_book' %}">+ Sell a Book</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2 class="heading">Available Books</h2>
+        {% if books %}
+        <div class="book-grid">
+            {% for book in books %}
+            <div class="book-card">
+                {% if book.image %}
+                <img src="{{ book.image.url }}" class="book-image" alt="Book Image">
+                {% else %}
+                <img src="https://via.placeholder.com/300x200?text=No+Image" class="book-image" alt="No Image">
+                {% endif %}
+                <div class="card-body">
+                    <h3>{{ book.title }}</h3>
+                    <p><strong>Author:</strong> {{ book.author }}</p>
+                    <p><strong>Condition:</strong> {{ book.condition }}</p>
+                    <p><strong>Price:</strong> ₹{{ book.price }}</p>
+                    <p class="small-text">Posted on {{ book.date_posted|date:"d M Y" }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty-msg">No books available right now.</p>
+        {% endif %}
+    </main>
+</body>
+
+</html>
