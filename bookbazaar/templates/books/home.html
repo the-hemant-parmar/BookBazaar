@@ -16,6 +16,12 @@
         </div>
     </nav>
 
+    {% if user.is_authenticated %}
+    <p>Hi {{ user.username }} | <a href="{% url 'logout' %}">Logout</a></p>
+    {% else %}
+    <p><a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a></p>
+    {% endif %}
+
     <main class="container">
         <h2 class="heading">Available Books</h2>
         {% if books %}
@@ -25,7 +31,7 @@
                 {% if book.image %}
                 <img src="{{ book.image.url }}" class="book-image" alt="Book Image">
                 {% else %}
-                <img src="https://via.placeholder.com/300x200?text=No+Image" class="book-image" alt="No Image">
+                <img src="{% static 'books/default_image.png' %}" class="book-image" alt="No Image">
                 {% endif %}
                 <div class="card-body">
                     <h3>{{ book.title }}</h3>

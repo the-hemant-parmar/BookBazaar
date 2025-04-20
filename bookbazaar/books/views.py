@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import Book
 from .forms import BookForm
+
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import RegisterForm
 
 
 def home(request):
@@ -21,3 +25,15 @@ def add_book(request):
     else:
         form = BookForm()
     return render(request, "books/add_book.html", {"form": form})
+
+
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request=request, user=user)
+            return redirect(to="home")
+    else:
+        form = RegisterForm()
+    return render(request, "books/register.html", {"form": form})
