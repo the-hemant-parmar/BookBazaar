@@ -1,6 +1,103 @@
-<h2>Register</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Register - BookBazaar</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .tip {
+            font-size: 12px;
+            background-color: #eef6ff;
+            padding: 6px 10px;
+            border-left: 4px solid #4A90E2;
+            margin-top: 4px;
+            color: #333;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 12px;
+            display: block;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Create Account</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <div class="tip">{{ field.help_text|safe }}</div>
+            {% endif %}
+            {% for error in field.errors %}
+            <div style="color: red; font-size: 12px;">{{ error }}</div>
+            {% endfor %}
+            {% endfor %}
+            <button type="submit">Register</button>
+        </form>
+        <a class="login-link" href="{% url 'login' %}">Already have an account? Login</a>
+    </div>
+</body>
+
+</html>
